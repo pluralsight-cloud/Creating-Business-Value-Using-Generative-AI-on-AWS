@@ -1,0 +1,18 @@
+Here are the commands to create and add the Lambda layer, run these commands in CloudShell:
+
+1) LIB_DIR=boto3-mylayer/python
+
+2) mkdir -p $LIB_DIR
+
+3) pip3 install boto3 -t $LIB_DIR
+
+4) cd boto3-mylayer
+
+5) zip -r /tmp/boto3-mylayer.zip .
+
+6) aws lambda publish-layer-version --layer-name boto3-mylayer --zip-file fileb:///tmp/boto3-mylayer.zip
+
+7) ( If your command prompt does not return after the previous command, type the letter q to quit) 
+
+8) Note the ARN including the version number of the layer you created and update the following command to reference your own layer:
+aws lambda update-function-configuration --function-name my-bedrock-demo --layers arn:aws:lambda:us-east-1:123456789012:layer:boto3-mylayer:1
